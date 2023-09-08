@@ -1,18 +1,18 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './Pages/Home';
+import HomePage from './Pages/HomePage';
 import Product from './Pages/Product';
 import Pricing from './Pages/Pricing';
+import PageNotFound from './Pages/PageNotFound';
 
 export default function App() {
   return (
     <div>
-      <h1>Worldwise</h1>
-
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<HomePage />} />
           <Route path='/product' element={<Product />} />
           <Route path='/pricing' element={<Pricing />} />
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
