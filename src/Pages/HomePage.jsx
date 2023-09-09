@@ -18,7 +18,7 @@ export default function HomePage() {
           you have wandered the world.
         </h2>
         <Link to='/app' className='cta'>
-          Start to experience
+          Start tracking now
         </Link>
       </section>
     </main>
