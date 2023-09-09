@@ -1,10 +1,11 @@
 import PageNav from '../components/PageNav';
+import styles from './PageNotFound.module.css';
 
 export default function PageNotFound() {
   return (
-    <div>
+    <div className={styles.pageNotFound}>
       <PageNav />
-      Page not found :(
+      <h1>Page not found! 😢</h1>
     </div>
   );
 }
