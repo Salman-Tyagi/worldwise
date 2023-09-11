@@ -6,7 +6,7 @@ import { useCitites } from '../contexts/CititesContext';
 
 export default function CountryList() {
   // 3. CONSUME CONTEXTAPI FOR PROPS
-  const { cities, isLoading } = useCitites;
+  const { cities, isLoading } = useCitites();
   if (isLoading) return <Spinner />;
 
   if (!cities.length)
