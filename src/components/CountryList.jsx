@@ -1,10 +1,12 @@
-/* eslint-disable react/prop-types */
 import CountryItem from './CountryItem';
 import Spinner from './Spinner';
 import Message from './Message';
 import styles from './CountryList.module.css';
+import { useCitites } from '../contexts/CititesContext';
 
-export default function CountryList({ cities, isLoading }) {
+export default function CountryList() {
+  // 3. CONSUME CONTEXTAPI FOR PROPS
+  const { cities, isLoading } = useCitites;
   if (isLoading) return <Spinner />;
 
   if (!cities.length)
