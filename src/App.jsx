@@ -1,11 +1,12 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
 import HomePage from './Pages/HomePage';
 import Pricing from './Pages/Pricing';
 import Product from './Pages/Product';
 import Login from './Pages/Login';
 import PageNotFound from './Pages/PageNotFound';
 import AppLayout from './Pages/AppLayout';
-import { useEffect, useState } from 'react';
 import CityList from './components/CityList';
 import CountryList from './components/CountryList';
 import City from './components/City';
@@ -43,10 +44,7 @@ export default function App() {
           <Route path='product' element={<Product />} />
           <Route path='login' element={<Login />} />
           <Route path='app' element={<AppLayout />}>
-            <Route
-              index
-              element={<CityList cities={cities} isLoading={isLoading} />}
-            />
+            <Route index element={<Navigate to='cities' />} />
             <Route
               path='cities'
               element={<CityList cities={cities} isLoading={isLoading} />}
