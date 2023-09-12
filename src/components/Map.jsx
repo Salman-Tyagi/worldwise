@@ -11,10 +11,10 @@ import {
 import { useCitites } from '../contexts/CititesContext';
 import Button from './Button';
 import { useGeolocation } from '../hooks/useGeoLocation';
+import { useUrlPosition } from '../hooks/useUrlPosition';
 import styles from './Map.module.css';
 
 export default function Map() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [mapPosition, setMapPosition] = useState([40, 0]);
   const { cities } = useCitites();
   const {
@@ -23,8 +23,7 @@ export default function Map() {
     getPosition,
   } = useGeolocation();
 
-  const mapLat = searchParams.get('lat');
-  const mapLng = searchParams.get('lng');
+  const [mapLat, mapLng] = useUrlPosition();
 
   useEffect(() => {
     if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);

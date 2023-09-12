@@ -1,24 +1,66 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useUrlPosition } from '../hooks/useUrlPosition';
 import Button from './Button';
+import BackButton from './BackButton';
+import Message from './Message';
+import Spinner from './Spinner';
 import styles from './Form.module.css';
 
+const BASE_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
+
 export function convertToEmoji(countryCode) {
-  const codePoints = countryCode
-    .toUpperCase()
-    .split('')
-    .map(char => 127397 + char.charCodeAt());
-  return String.fromCodePoint(...codePoints);
+  if (countryCode) {
+    const codePoints = countryCode
+      .toUpperCase()
+      .split('')
+      .map(char => 127397 + char.charCodeAt());
+    return String.fromCodePoint(...codePoints);
+  }
 }
 
 function Form() {
-  const navigate = useNavigate();
   const [cityName, setCityName] = useState('');
   const [country, setCountry] = useState('');
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState('');
+  const [isGeoLocationLoading, setIsGeocodingLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [emoji, setEmoji] = useState('');
+
+  const [lat, lng] = useUrlPosition();
+
+  useEffect(() => {
+    async function fetchGeocodingCity() {
+      try {
+        setIsGeocodingLoading(true);
+        setError('');
+
+        const res = await fetch(`${BASE_URL}?latitude=${lat}&longitude=${lng}`);
+        if (!res.ok) throw new Error('Error in fetching data...');
+
+        const data = await res.json();
+        if (!data.countryCode)
+          throw new Error(
+            'No city or country found, please click somewhere else'
+          );
+
+        setCityName(data.city || data.locality || '');
+        setCountry(data.country);
+        setEmoji(convertToEmoji(data.countryCode));
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsGeocodingLoading(false);
+      }
+    }
+
+    fetchGeocodingCity();
+  }, [lat, lng]);
+
+  if (isGeoLocationLoading) return <Spinner />;
+  if (error) return <Message message={error} />;
 
   return (
     <form className={styles.form}>
@@ -29,7 +71,7 @@ function Form() {
           onChange={e => setCityName(e.target.value)}
           value={cityName}
         />
-        {/* <span className={styles.flag}>{emoji}</span> */}
+        <span className={styles.flag}>{emoji}</span>
       </div>
 
       <div className={styles.row}>
@@ -48,15 +90,7 @@ function Form() {
 
       <div className={styles.buttons}>
         <Button type='primary'>Add</Button>
-        <Button
-          type='back'
-          onClick={e => {
-            e.preventDefault();
-            navigate(-1);
-          }}
-        >
-          &larr; Back
-        </Button>
+        <BackButton />
       </div>
     </form>
   );
