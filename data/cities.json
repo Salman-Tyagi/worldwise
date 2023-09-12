@@ -35,6 +35,54 @@
         "lng": 13.376933665713324
       },
       "id": 98443197
+    },
+    {
+      "cityName": "Ossa de Montiel",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "position": {
+        "lat": "38.95940879245423",
+        "lng": "-2.7246093750000004"
+      },
+      "date": "2023-09-20T12:21:49.000Z",
+      "notes": "I wanna visit this beautiful country",
+      "id": 98443198
+    },
+    {
+      "cityName": "Olvera",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "position": {
+        "lat": "36.96744946416934",
+        "lng": "-5.163574218750001"
+      },
+      "date": "2023-09-12T12:22:36.834Z",
+      "notes": "Hello everyone.",
+      "id": 98443199
+    },
+    {
+      "cityName": "Ighoud",
+      "country": "Morocco",
+      "emoji": "🇲🇦",
+      "position": {
+        "lat": "32.10118973232094",
+        "lng": "-8.789062500000002"
+      },
+      "date": "2023-09-12T12:23:00.467Z",
+      "notes": "nice one",
+      "id": 98443200
+    },
+    {
+      "cityName": "Delhi",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "position": {
+        "lat": "28.66937977201195",
+        "lng": "77.16796875000001"
+      },
+      "date": "2023-09-12T12:24:33.383Z",
+      "notes": "It is best place to visit in India",
+      "id": 98443201
     }
   ]
 }
