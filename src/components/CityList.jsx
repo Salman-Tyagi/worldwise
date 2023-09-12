@@ -6,8 +6,8 @@ import styles from './CityList.module.css';
 
 export default function CityList() {
   const { cities, isLoading } = useCitites();
-  if (isLoading) return <Spinner />;
 
+  if (isLoading) return <Spinner />;
   if (!cities.length)
     return <Message message='Add your first city by clicking on the map' />;
 
