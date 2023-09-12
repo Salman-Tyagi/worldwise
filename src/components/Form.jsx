@@ -87,7 +87,7 @@ function Form() {
   }
 
   return (
-    <form className={styles.form} onSubmit={submitHandler}>
+    <form className={`${styles.form}`} onSubmit={submitHandler}>
       <div className={styles.row}>
         <label htmlFor='cityName'>City name</label>
         <input

@@ -5,7 +5,12 @@ import { useCitites } from '../contexts/CititesContext';
 export default function CityItem({ city }) {
   const { cityName, date, emoji, id, position } = city;
   const { lat, lng } = position;
-  const { currentCity } = useCitites();
+  const { currentCity, deleteCity } = useCitites();
+
+  const deleteHandler = e => {
+    e.preventDefault();
+    deleteCity(id);
+  };
 
   return (
     <li>
@@ -18,7 +23,9 @@ export default function CityItem({ city }) {
         <span className={styles.emoji}>{emoji}</span>
         <p className={styles.name}>{cityName}</p>
         <p className={styles.date}>({new Date(date).toDateString()})</p>
-        <button className={styles.deleteBtn}>&times;</button>
+        <button className={styles.deleteBtn} onClick={deleteHandler}>
+          &times;
+        </button>
       </Link>
     </li>
   );

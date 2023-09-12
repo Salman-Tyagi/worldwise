@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 
 const BASE_URL = 'http://localhost:8000';
 
@@ -17,8 +18,8 @@ function CitiesProvider({ children }) {
         const res = await fetch(`${BASE_URL}/cities`);
         const data = await res.json();
         setCities(data);
-      } catch (err) {
-        console.error('There is error in fetching cities...');
+      } catch {
+        alert('There is error in fetching cities...');
       } finally {
         setIsLoading(false);
       }
@@ -33,8 +34,8 @@ function CitiesProvider({ children }) {
       const res = await fetch(`${BASE_URL}/cities/${id}`);
       const data = await res.json();
       setCurrentCity(data);
-    } catch (err) {
-      throw new Error('There is error in fetching city...');
+    } catch {
+      alert('There is error in fetching city...');
     } finally {
       setIsLoading(false);
     }
@@ -53,8 +54,23 @@ function CitiesProvider({ children }) {
       const data = await res.json();
       setCurrentCity(data);
       setCities(cities => [...cities, data]);
-    } catch (err) {
-      throw new Error('There is error in fetching city...');
+    } catch {
+      alert('There is error in fetching city...');
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function deleteCity(id) {
+    try {
+      setIsLoading(true);
+      await fetch(`${BASE_URL}/cities/${id}`, {
+        method: 'DELETE',
+      });
+
+      setCities(cities => cities.filter(city => id !== city.id));
+    } catch {
+      alert('Error in deleting city...');
     } finally {
       setIsLoading(false);
     }
@@ -63,7 +79,14 @@ function CitiesProvider({ children }) {
   return (
     // 2. SET VALUES FOR THE CONTEXT API
     <CitiesContext.Provider
-      value={{ cities, isLoading, currentCity, getCity, createCity }}
+      value={{
+        cities,
+        isLoading,
+        currentCity,
+        getCity,
+        createCity,
+        deleteCity,
+      }}
     >
       {children}
     </CitiesContext.Provider>
