@@ -1,7 +1,7 @@
-import { useCitites } from '../contexts/CititesContext';
 import CityItem from './CityItem';
 import Spinner from './Spinner';
 import Message from './Message';
+import { useCitites } from '../contexts/CititesContext';
 import styles from './CityList.module.css';
 
 export default function CityList() {

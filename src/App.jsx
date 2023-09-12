@@ -19,9 +19,13 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route index element={<HomePage />} />
+
             <Route path='pricing' element={<Pricing />} />
+
             <Route path='product' element={<Product />} />
+
             <Route path='login' element={<Login />} />
+
             <Route path='app' element={<AppLayout />}>
               <Route index element={<Navigate to='cities' />} />
               <Route path='cities' element={<CityList />} />
@@ -29,6 +33,7 @@ export default function App() {
               <Route path='countries' element={<CountryList />} />
               <Route path='form' element={<Form />} />
             </Route>
+
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

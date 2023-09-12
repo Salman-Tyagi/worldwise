@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import styles from './CityItem.module.css';
 import { useCitites } from '../contexts/CititesContext';
 
-/* eslint-disable react/prop-types */
 export default function CityItem({ city }) {
   const { cityName, date, emoji, id, position } = city;
   const { lat, lng } = position;
