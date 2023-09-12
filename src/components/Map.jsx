@@ -6,22 +6,34 @@ import {
   Marker,
   Popup,
   useMap,
-  useMapEvent,
   useMapEvents,
 } from 'react-leaflet';
 import { useCitites } from '../contexts/CititesContext';
+import Button from './Button';
+import { useGeolocation } from '../hooks/useGeoLocation';
 import styles from './Map.module.css';
 
 export default function Map() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [mapPosition, setMapPosition] = useState([40, 0]);
   const { cities } = useCitites();
+  const {
+    isLoading: isGeoLocationLoading,
+    position: geoLocationPosition,
+    getPosition,
+  } = useGeolocation();
+
   const mapLat = searchParams.get('lat');
   const mapLng = searchParams.get('lng');
 
   useEffect(() => {
     if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
   }, [mapLat, mapLng]);
+
+  useEffect(() => {
+    if (geoLocationPosition)
+      setMapPosition([geoLocationPosition.lat, geoLocationPosition.lng]);
+  }, [geoLocationPosition]);
 
   return (
     <div className={styles.mapContainer}>
@@ -48,6 +60,9 @@ export default function Map() {
         <ChangeCenter position={mapPosition} />
         <ClickDetect />
       </MapContainer>
+      <Button type='position' onClick={getPosition}>
+        {isGeoLocationLoading ? 'Loading...' : 'Current location'}
+      </Button>
     </div>
   );
 }
