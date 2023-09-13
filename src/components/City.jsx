@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useCitites } from '../contexts/CititesContext';
-import BackButton from './BackButton';
 
-import styles from './City.module.css';
+import BackButton from './BackButton';
 import Spinner from './Spinner';
+import styles from './City.module.css';
 
 const formatDate = date =>
   new Intl.DateTimeFormat('en', {
@@ -20,7 +20,7 @@ function City() {
 
   useEffect(() => {
     getCity(id);
-  }, [id]);
+  }, [id, getCity]);
 
   const { cityName, emoji, date, notes } = currentCity;
 

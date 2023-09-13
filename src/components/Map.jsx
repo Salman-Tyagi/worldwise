@@ -9,9 +9,9 @@ import {
   useMapEvents,
 } from 'react-leaflet';
 import { useCitites } from '../contexts/CititesContext';
-import Button from './Button';
 import { useGeolocation } from '../hooks/useGeoLocation';
 import { useUrlPosition } from '../hooks/useUrlPosition';
+import Button from './Button';
 import styles from './Map.module.css';
 
 export default function Map() {

@@ -1,8 +1,8 @@
 import CountryItem from './CountryItem';
 import Spinner from './Spinner';
 import Message from './Message';
-import styles from './CountryList.module.css';
 import { useCitites } from '../contexts/CititesContext';
+import styles from './CountryList.module.css';
 
 export default function CountryList() {
   // 3. CONSUME CONTEXTAPI FOR PROPS
