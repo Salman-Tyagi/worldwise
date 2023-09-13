@@ -68,6 +68,7 @@ function Form() {
   }, [lat, lng]);
 
   if (isGeoLocationLoading) return <Spinner />;
+  if (!lat || !lng) return;
   if (error) return <Message message={error} />;
 
   function submitHandler(e) {
