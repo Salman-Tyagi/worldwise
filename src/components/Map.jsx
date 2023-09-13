@@ -22,7 +22,6 @@ export default function Map() {
     position: geoLocationPosition,
     getPosition,
   } = useGeolocation();
-
   const [mapLat, mapLng] = useUrlPosition();
 
   useEffect(() => {
